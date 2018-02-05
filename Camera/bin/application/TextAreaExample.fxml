@@ -1,0 +1,170 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.paint.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.shape.*?>
+<?import javafx.scene.media.*?>
+<?import javafx.scene.web.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane fx:id="Pane" minHeight="-Infinity" minWidth="-Infinity" prefHeight="750.0" prefWidth="700.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.TextAreaController">
+   <children>
+      <VBox fx:id="vbox1" layoutX="59.0" layoutY="65.0" prefHeight="624.0" prefWidth="660.0" spacing="10.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <children>
+            <MenuBar translateY="-5.0">
+              <menus>
+                <Menu mnemonicParsing="false" text="File">
+                  <items>
+                    <MenuItem fx:id="menuOpenImage" mnemonicParsing="false" onAction="#menuOpenImage" text="Load Image" />
+                        <MenuItem fx:id="menuSaveImage" mnemonicParsing="false" onAction="#menuSaveImage" text="Save Image" />
+                        <SeparatorMenuItem mnemonicParsing="false" />
+                        <MenuItem fx:id="menuLoadConfig" mnemonicParsing="false" onAction="#menuLoadConfig" text="Load Configuration" />
+                        <MenuItem fx:id="menuSaveConfig" mnemonicParsing="false" onAction="#menuSaveConfig" text="Save Configuration" />
+                        <SeparatorMenuItem mnemonicParsing="false" />
+                        <MenuItem mnemonicParsing="false" onAction="#quitprogram" text="Quit" />
+                  </items>
+                </Menu>
+                <Menu mnemonicParsing="false" text="Zoom">
+                  <items>
+                    <MenuItem mnemonicParsing="false" onAction="#zoomOriginal" text="Zoom Original" />
+                        <MenuItem mnemonicParsing="false" onAction="#zoomContour" text="Zoom Contours" />
+                  </items>
+                </Menu>
+                  <Menu mnemonicParsing="false" text="Camera Settings">
+                    <items>
+                      <MenuItem mnemonicParsing="false" onAction="#cameraSettings" text="Set Camera Parameters" />
+                        <MenuItem mnemonicParsing="false" onAction="#calibrateFocalLength" text="Focal Length Calibration" />
+                    </items>
+                  </Menu>
+              </menus>
+            </MenuBar>
+            <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
+               <children>
+                  <VBox prefHeight="200.0" prefWidth="100.0" translateX="-90.0">
+                     <children>
+                        <Button fx:id="bVideo" mnemonicParsing="false" onAction="#toggleVideo" prefHeight="39.0" prefWidth="63.0" text="Video" />
+                     </children>
+                  </VBox>
+                  <ImageView fx:id="imageview1" fitHeight="150.0" fitWidth="200.0" onMouseClicked="#zoomOriginal" onMouseDragExited="#changeFilter" pickOnBounds="true" preserveRatio="true" />
+                  <ImageView fx:id="imageview2" fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" translateX="55.0" />
+               </children>
+            </HBox>
+            <HBox alignment="CENTER" prefHeight="26.0" prefWidth="480.0" spacing="200.0">
+               <children>
+                  <Label text="Original" />
+                  <Label alignment="CENTER" text="Color Mask" />
+               </children>
+               <opaqueInsets>
+                  <Insets />
+               </opaqueInsets>
+            </HBox>
+            <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
+               <children>
+                  <VBox prefHeight="150.0" prefWidth="149.0" translateX="-65.0">
+                     <children>
+                        <TextArea fx:id="taMessages" editable="false" prefHeight="150.0" prefWidth="153.0" />
+                     </children>
+                  </VBox>
+                  <ImageView fx:id="imageview3" fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" translateX="-27.0" />                 
+                  <ImageView fx:id="imageview4" fitHeight="150.0" fitWidth="200.0" onMouseClicked="#zoomContour" pickOnBounds="true" preserveRatio="true" translateX="20.0" />
+               </children>
+            </HBox>
+            <HBox alignment="CENTER" prefHeight="30.0" prefWidth="480.0" spacing="200.0">
+               <children>
+                  <Label text="Threshold" />
+                  <Label text="Contours" />
+               </children>
+            </HBox>
+            <HBox alignment="CENTER_LEFT" prefHeight="40.0" prefWidth="300.0" spacing="20.0">
+               <children>
+                  <Button fx:id="button1" mnemonicParsing="false" onAction="#button1Action" text="Capture Image" />
+                  <Button fx:id="button2" mnemonicParsing="false" onAction="#contoursAction" text="Calculate Contours" />
+
+               </children>
+               <padding>
+                  <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+               </padding>
+            </HBox>
+            <GridPane alignment="CENTER">
+              <columnConstraints>
+                <ColumnConstraints maxWidth="86.0" minWidth="30.0" prefWidth="77.0" />
+                <ColumnConstraints hgrow="SOMETIMES" maxWidth="315.0" minWidth="10.0" prefWidth="164.0" />
+                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="412.0" minWidth="0.0" prefWidth="101.0" />
+                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="412.0" minWidth="10.0" prefWidth="65.0" />
+                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="421.0" minWidth="10.0" prefWidth="153.0" />
+                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="421.0" minWidth="10.0" prefWidth="81.0" />
+              </columnConstraints>
+              <rowConstraints>
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+              </rowConstraints>
+               <children>
+                  <Slider fx:id="thresh1a" max="255.0" maxWidth="150.0" onMouseDragged="#setTextFields1" prefHeight="31.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                  <Slider fx:id="filter1a" majorTickUnit="10.0" max="255.0" maxWidth="150.0" onMouseDragged="#setTextFields1" prefWidth="150.0" GridPane.columnIndex="1" />
+                  <Label text="Color 1" />
+                  <Label text="Thresh 1" GridPane.rowIndex="1" />
+                  <Slider fx:id="filter1b" max="255.0" maxWidth="150.0" onMouseDragged="#setTextFields1" prefWidth="200.0" value="255.0" GridPane.columnIndex="4" />
+                  <Slider fx:id="thresh1b" max="255.0" maxWidth="150.0" minHeight="-Infinity" onMouseDragged="#setTextFields1" prefWidth="200.0" value="255.0" GridPane.columnIndex="4" GridPane.rowIndex="1" />
+                  <Label text="Color 2" GridPane.columnIndex="3" />
+                  <Label text="Thresh 2" GridPane.columnIndex="3" GridPane.rowIndex="1" />
+                  <TextField fx:id="tfColorA" maxHeight="20.0" maxWidth="50.0" onAction="#setSliders1" prefHeight="15.0" prefWidth="50.0" text="0" GridPane.columnIndex="2" />
+                  <TextField fx:id="tfColorB" maxHeight="20.0" maxWidth="50.0" onAction="#setSliders1" prefHeight="20.0" prefWidth="50.0" text="255" GridPane.columnIndex="5" />
+                  <TextField fx:id="tfThreshA" maxHeight="20.0" maxWidth="50.0" onAction="#setSliders1" prefHeight="20.0" prefWidth="50.0" text="0" GridPane.columnIndex="2" GridPane.rowIndex="1" />
+                  <TextField fx:id="tfThreshB" maxHeight="20.0" maxWidth="50.0" onAction="#setSliders1" prefHeight="20.0" prefWidth="50.0" text="255" GridPane.columnIndex="5" GridPane.rowIndex="1" />
+               </children>
+            </GridPane>
+            <HBox alignment="CENTER_LEFT" prefHeight="38.0" prefWidth="640.0" spacing="15.0">
+               <children>
+                  <Button fx:id="buttonDistance" mnemonicParsing="false" onAction="#calculateDistance" text="Calculate Distance" />
+                  <Button mnemonicParsing="false" onAction="#pickContour" text="Auto-Choose Contour" />
+                  <Label text="Set Contour" translateX="-5.0" />
+                  <TextField fx:id="contourNum" onAction="#ManualContourSet" prefHeight="27.0" prefWidth="44.0" text="1" translateX="-15.0" />
+                  <Label text="Calculated Dist:" translateX="5.0" />
+                  <Label />
+                  <Label fx:id="distTarget" prefHeight="17.0" prefWidth="53.0" text="-" />
+               </children>
+               <padding>
+                  <Insets left="20.0" />
+               </padding>
+            </HBox>
+            <HBox alignment="CENTER_LEFT" prefHeight="37.0" prefWidth="640.0" spacing="20.0">
+               <children>
+                  <Label prefHeight="17.0" prefWidth="97.0" text="Target Dims:" />
+                  <Label prefHeight="17.0" prefWidth="53.0" text="width" />
+                  <TextField fx:id="targetWidth" onAction="#calculateAR" prefHeight="27.0" prefWidth="52.0" text="1" />
+                  <Label prefHeight="17.0" prefWidth="53.0" text="height" />
+                  <TextField fx:id="targetHeight" onAction="#calculateAR" prefHeight="27.0" prefWidth="51.0" text="1" />
+                  <Label prefHeight="17.0" prefWidth="37.0" text="A.R." />
+                  <Label fx:id="aspectRatio" prefHeight="17.0" prefWidth="60.0" text="1" textFill="#276b35" />
+                  <Label fx:id="ldistTarget" text="Distance to Target" visible="false" />
+               </children>
+               <padding>
+                  <Insets left="20.0" />
+               </padding>
+            </HBox>
+            <Label text="Distance Variables" translateY="12.0" />
+            <HBox alignment="CENTER_LEFT" prefHeight="44.0" prefWidth="640.0" spacing="10.0">
+               <children>
+                  <Label text="C1" />
+                  <TextField prefHeight="20.0" prefWidth="60.0" translateX="-5.0" />
+                  <Label text="C2" />
+                  <TextField prefHeight="20.0" prefWidth="60.0" translateX="-5.0" />
+                  <Label text="C3" />
+                  <TextField prefHeight="20.0" prefWidth="60.0" translateX="-5.0" />
+               </children>
+               <padding>
+                  <Insets left="20.0" />
+               </padding>
+            </HBox>
+         </children>
+         <padding>
+            <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+         </padding>
+      </VBox>
+   </children>
+</AnchorPane>
